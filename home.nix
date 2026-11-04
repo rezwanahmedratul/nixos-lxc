@@ -13,12 +13,14 @@
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
-  # Git configuration
+  # Git configuration (modern Home Manager syntax)
   programs.git = {
     enable = true;
-    userName = "Rezwan Ahmed Ratul";
-    userEmail = "rezwanahmedratul007@gmail.com";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Rezwan Ahmed Ratul";
+        email = "rezwanahmedratul007@gmail.com";
+      };
       init.defaultBranch = "main";
       pull.rebase = false;
       color.ui = "auto";

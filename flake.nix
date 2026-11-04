@@ -56,7 +56,10 @@
               };
               home-manager.users.${username} = import ./home.nix;
             }
-          ];
+          ] ++ nixpkgs.lib.optional (!isProxmox) {
+            # Disable bundling the whole nixpkgs channel to save ~200MB+ in image size
+            system.installer.channel.enable = false;
+          };
         };
     in
     {
@@ -86,4 +89,3 @@
       };
     };
 }
-
