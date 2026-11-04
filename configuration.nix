@@ -35,6 +35,9 @@
   # Root account configuration
   users.users.root = {
     initialHashedPassword = ""; # Allows passwordless root login on container console
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2kXjQ5NmBPJUxeLwJkex8Za6L+yLtQy021v4nrg0TV rezwanahmedratul007@gmail.com"
+    ];
   };
 
   # Primary non-root user
@@ -47,10 +50,24 @@
     ];
     shell = pkgs.zsh;
     initialHashedPassword = "";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2kXjQ5NmBPJUxeLwJkex8Za6L+yLtQy021v4nrg0TV rezwanahmedratul007@gmail.com"
+    ];
   };
 
   # Passwordless sudo for wheel group inside container
   security.sudo.wheelNeedsPassword = false;
+
+  # OpenSSH server configuration
+  services.openssh = {
+    enable = true;
+    startWhenNeeded = false; # Run as dedicated daemon on boot
+    settings = {
+      PermitRootLogin = "prohibit-password";
+      PasswordAuthentication = true;
+    };
+    openFirewall = true;
+  };
 
   # Nix Package Manager & Flakes configuration
   nix.settings = {
