@@ -13,7 +13,7 @@
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
-  # Git configuration (modern Home Manager syntax)
+  # Git configuration
   programs.git = {
     enable = true;
     settings = {
@@ -42,14 +42,18 @@
     };
 
     shellAliases = {
-      # Modern file listing
-      ll = "eza -l --icons";
-      la = "eza -la --icons";
-      ls = "eza --icons";
-      lt = "eza --tree --level=2 --icons";
+      # Standard file listing
+      ll = "ls -l";
+      la = "ls -la";
+      l = "ls -CF";
 
-      # Modern pager
-      cat = "bat";
+      # Editor aliases
+      v = "vim";
+      sv = "sudo vim";
+
+      # Directory navigation
+      ".." = "cd ..";
+      "..." = "cd ../..";
 
       # Git aliases
       gs = "git status";
@@ -59,14 +63,6 @@
       gl = "git pull";
       gd = "git diff";
       gb = "git branch";
-
-      # Editor aliases
-      v = "nvim";
-      sv = "sudo nvim";
-
-      # Directory navigation
-      ".." = "cd ..";
-      "..." = "cd ../..";
 
       # Nix maintenance
       ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d";
@@ -79,53 +75,14 @@
     enable = true;
     enableCompletion = true;
     shellAliases = {
-      ll = "eza -l --icons";
-      la = "eza -la --icons";
-      ls = "eza --icons";
-      cat = "bat";
-      gs = "git status";
-      v = "nvim";
-      sv = "sudo nvim";
+      ll = "ls -l";
+      la = "ls -la";
+      l = "ls -CF";
+      v = "vim";
+      sv = "sudo vim";
       ".." = "cd ..";
+      gs = "git status";
       ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d";
     };
   };
-
-  # Starship cross-shell prompt
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-
-  # Zoxide smart directory jumping
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-
-  # Fzf fuzzy finder
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-
-  # Bat cat-clone with syntax highlighting
-  programs.bat.enable = true;
-
-  # Eza modern ls-replacement
-  programs.eza.enable = true;
-
-  # Additional user packages
-  home.packages = with pkgs; [
-    fastfetch
-    htop
-    btop
-    ripgrep
-    fd
-    jq
-    tmux
-  ];
 }

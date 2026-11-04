@@ -67,39 +67,15 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # System-wide packages
+  # System-wide packages (essential base utilities only)
   environment.systemPackages = with pkgs; [
-    # Core utilities
     curl
     wget
     git
     vim
-    neovim
-    tmux
+    htop
     file
     which
-    tree
-    jq
-
-    # System inspection & performance
-    htop
-    btop
-    fastfetch
-
-    # Networking tools
-    iproute2
-    nettools
-    dnsutils
-    iptables
-
-    # Modern shell tools
-    eza
-    bat
-    ripgrep
-    fd
-    zoxide
-    fzf
-    starship
   ];
 
   system.stateVersion = "26.11";

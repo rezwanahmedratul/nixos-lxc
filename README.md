@@ -7,9 +7,9 @@ A modular, reproducible Flake configuration for building lightweight NixOS LXC /
 ## Architecture Overview
 
 - **`flake.nix`**: Flake inputs and outputs. Exposes configurations (`nixos-lxc`, `proxmox-lxc`) and buildable packages (`default`, `tarball`, `proxmox`).
-- **`configuration.nix`**: System-level configuration (hostname, timezone `Asia/Dhaka`, users `root` & `ratul`, shells, sudo permissions, Nix Flakes enablement, and essential system CLI packages).
+- **`configuration.nix`**: System-level configuration (hostname, timezone `Asia/Dhaka`, users `root` & `ratul`, shells, sudo permissions, Nix Flakes enablement, and essential system CLI packages: `curl`, `wget`, `git`, `vim`, `htop`, `file`, `which`).
 - **`configure.nix`**: Convenience wrapper / alias module importing `configuration.nix`.
-- **`home.nix`**: User-level Home Manager configuration for `ratul` (Git setup, Zsh, Starship prompt, Bat, Eza, Zoxide, Fzf, and developer CLI tools).
+- **`home.nix`**: User-level Home Manager configuration for `ratul` (Git setup, Zsh with autosuggestions and syntax highlighting, standard shell aliases).
 - **`modules/lxc.nix`**: Container optimizations:
   - Disables installer channel bundling to minimize image size (~200MB+ savings).
   - TTY1 getty and console auto-spawning for instant `lxc console` or `pct enter` access.
@@ -90,5 +90,5 @@ The output tarball will be located in:
   - SSH: key-based authentication recommended (`PermitRootLogin prohibit-password`).
 - **Standard User (`ratul`)**:
   - Full passwordless sudo privileges inside container.
-  - Pre-configured with Zsh, Starship prompt, and developer tooling via Home Manager.
+  - Pre-configured with Zsh and Git via Home Manager.
 
