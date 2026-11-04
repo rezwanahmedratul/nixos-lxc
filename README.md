@@ -91,3 +91,4 @@ The output tarball will be located in:
 - **Standard User (`ratul`)**:
   - Full passwordless sudo privileges inside container.
   - Pre-configured with Zsh, Starship prompt, and developer tooling via Home Manager.
+
