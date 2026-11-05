@@ -41,8 +41,8 @@
                 "${nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
             )
 
-            # Core NixOS system configuration (imports home-manager module and feature modules)
-            ./configuration.nix
+            # Core NixOS system configuration
+            ./modules/core
           ]
           ++ nixpkgs.lib.optional (!isProxmox) {
             # Disable bundling the whole nixpkgs channel to save ~200MB+ in image size

@@ -57,9 +57,11 @@ Edit `variables.nix` in the repository root to select your target container conf
 ## Architecture Overview
 
 - **`variables.nix`**: Single source of truth for mode toggles, users, hostnames, and SSH authorized keys.
-- **`configuration.nix`**: Top-level system entrypoint. Imports Home Manager module and `modules/core`.
 - **`modules/core/`**: Core system configuration and service modules:
-  - **`default.nix`**: Core system setup (hostname, timezone, locale, sudo, openssh, users, nix settings, packages).
+  - **`default.nix`**: Aggregates all core modules (`system.nix`, `user.nix`, `packages.nix`, `lxc.nix`, and conditional feature modules).
+  - **`system.nix`**: System settings (hostname, timezone, locale, sudo, openssh, nix flakes enablement, stateVersion).
+  - **`user.nix`**: User accounts and Home Manager integration (`imports = [ ./../home ]`).
+  - **`packages.nix`**: System-wide packages (`curl`, `git`, `vim`).
   - **`jenkins.nix`**: Configures Jenkins SSH build agent (JDK 21, Docker daemon to build images, `jenkins` user in `docker` group, SSH setup).
   - **`docker.nix`**: Enables standalone Docker daemon with weekly auto-pruning and installs `docker-compose`.
   - **`lxc.nix`**: LXC container optimizations (fast network boot, tty autologin, unprivileged ping support).
@@ -67,8 +69,7 @@ Edit `variables.nix` in the repository root to select your target container conf
   - **`default.nix`**: User home profile entrypoint, importing `git.nix` and `shell.nix`.
   - **`git.nix`**: User git identity, default branch, and options.
   - **`shell.nix`**: Zsh and Bash configurations, syntax highlighting, autosuggestions, and shared aliases.
-- **`home.nix`**: Root convenience wrapper redirecting to `modules/home`.
-- **`flake.nix`**: Flake inputs and outputs, exposing configurations (`nixos-lxc`, `proxmox-lxc`) and buildable packages (`tarball`, `proxmox`).
+- **`flake.nix`**: Flake inputs and outputs, exposing configurations (`nixos-lxc`, `proxmox-lxc`) and buildable packages (`tarball`, `proxmox`). Imports `./modules/core` directly.
 
 ---
 
