@@ -17,19 +17,20 @@
       ...
     }@inputs:
     let
+      vars = import ./variables.nix;
       system = "x86_64-linux";
-      username = "ratul";
+      username = vars.username or "ratul";
 
       # Helper function to define an LXC NixOS system
       mkLxcSystem =
         {
-          hostName ? "nixos-lxc",
+          hostName ? vars.hostName or "nixos-lxc",
           isProxmox ? false,
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs username hostName;
+            inherit inputs vars username hostName;
           };
           modules = [
             # Base container virtualization module from nixpkgs
@@ -40,23 +41,10 @@
                 "${nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
             )
 
-            # LXC container tuning & optimizations
-            ./modules/lxc.nix
-
-            # Core NixOS system configuration
+            # Core NixOS system configuration (imports home-manager module and feature modules)
             ./configuration.nix
-
-            # Home Manager module & user configuration
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs username;
-              };
-              home-manager.users.${username} = import ./home.nix;
-            }
-          ] ++ nixpkgs.lib.optional (!isProxmox) {
+          ]
+          ++ nixpkgs.lib.optional (!isProxmox) {
             # Disable bundling the whole nixpkgs channel to save ~200MB+ in image size
             system.installer.channel.enable = false;
           };
@@ -66,13 +54,13 @@
       nixosConfigurations = {
         # Standard LXC / Incus / LXD container configuration
         nixos-lxc = mkLxcSystem {
-          hostName = "nixos-lxc";
+          hostName = vars.hostName or "nixos-lxc";
           isProxmox = false;
         };
 
         # Proxmox VE LXC container configuration
         proxmox-lxc = mkLxcSystem {
-          hostName = "proxmox-lxc";
+          hostName = vars.hostName or "proxmox-lxc";
           isProxmox = true;
         };
       };

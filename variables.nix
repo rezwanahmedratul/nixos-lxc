@@ -1,0 +1,22 @@
+{
+  # Mode Selection (Choose ONE mode; both cannot be true)
+  jenkins = true; # Jenkins Agent (includes Docker, removes ratul, adds jenkins user)
+  docker = false; # Standalone Docker (Docker & Compose with user ratul)
+
+  # System Hostname
+  hostName = "nixos-jenkins-agent";
+
+  # Primary User Configuration (Active when jenkins = false)
+  username = "ratul";
+
+  # SSH Authorized Keys for user 'ratul' and root
+  authorizedKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2kXjQ5NmBPJUxeLwJkex8Za6L+yLtQy021v4nrg0TV rezwanahmedratul007@gmail.com"
+  ];
+
+  # SSH Authorized Keys for user 'jenkins'
+  # Add the public SSH key of your Docker Jenkins Controller here (e.g. from id_rsa.pub or id_ed25519.pub):
+  jenkinsAuthorizedKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2kXjQ5NmBPJUxeLwJkex8Za6L+yLtQy021v4nrg0TV rezwanahmedratul007@gmail.com"
+  ];
+}
