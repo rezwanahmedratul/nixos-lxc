@@ -20,6 +20,9 @@
   imports = [
     # LXC container optimizations & tuning
     ./lxc.nix
+
+    # System-wide packages
+    ./package.nix
   ]
   ++ lib.optional vars.jenkins ./jenkins.nix
   ++ lib.optional vars.docker ./docker.nix;
@@ -102,13 +105,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  # Essential base utilities only (slimmed down)
-  environment.systemPackages = with pkgs; [
-    curl
-    git
-    vim
-  ];
 
   system.stateVersion = "26.11";
 }
