@@ -36,7 +36,29 @@
     settings = {
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = true;
+      # Allow standard MACs required by Jenkins Java SSH agent (Trilead SSH)
+      Macs = [
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "umac-128-etm@openssh.com"
+        "hmac-sha2-512"
+        "hmac-sha2-256"
+        "hmac-sha1"
+      ];
+      # Allow standard key exchange algorithms for compatibility
+      KexAlgorithms = [
+        "curve25519-sha256"
+        "curve25519-sha256@libssh.org"
+        "ecdh-sha2-nistp256"
+        "ecdh-sha2-nistp384"
+        "ecdh-sha2-nistp521"
+        "diffie-hellman-group-exchange-sha256"
+        "diffie-hellman-group14-sha256"
+      ];
     };
+    extraConfig = ''
+      HostKeyAlgorithms +ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-ed25519
+    '';
     openFirewall = true;
   };
 
