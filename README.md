@@ -3,7 +3,7 @@
 A modular, reproducible Flake configuration for building lightweight NixOS LXC / Proxmox VE / Incus container images with Home Manager integration.
 
 Supports configurable modes via `variables.nix`:
-- **Jenkins SSH Build Agent** (JDK 21, Docker daemon to build images, dedicated `jenkins` user, controller SSH access).
+- **Jenkins SSH Build Agent** (JDK 25, Docker daemon to build images, dedicated `jenkins` user, controller SSH access).
 - **Standalone Docker** (Docker daemon & Docker Compose, primary user `ratul` with docker permissions).
 - **Bare Metal** (Minimal NixOS LXC container with user `ratul`).
 
@@ -46,7 +46,7 @@ Edit `variables.nix` in the repository root to select your target container conf
 | :--- | :--- | :--- | :--- |
 | **User `jenkins`** | Yes (in `docker` & `wheel` groups) | No | No |
 | **User `ratul`** | **Disabled** (no home-manager profile) | Enabled (`docker` & `wheel`) | Enabled (`wheel`) |
-| **JDK 21 (`jdk21`)** | Installed & set to `JAVA_HOME` + `/usr/bin/java` | Not installed | Not installed |
+| **JDK 25 (`jdk25`)** | Installed & set to `JAVA_HOME` + `/usr/bin/java` | Not installed | Not installed |
 | **Docker Daemon** | Enabled (`virtualisation.docker`) | Enabled (`virtualisation.docker`) | Disabled |
 | **Docker Compose** | Installed | Installed | Not installed |
 | **SSH Daemon** | Enabled on boot | Enabled on boot | Enabled on boot |
@@ -62,7 +62,7 @@ Edit `variables.nix` in the repository root to select your target container conf
   - **`system.nix`**: System settings (hostname, timezone, locale, sudo, openssh, nix flakes enablement, stateVersion).
   - **`user.nix`**: User accounts and Home Manager integration (`imports = [ ./../home ]`).
   - **`packages.nix`**: System-wide packages (`curl`, `git`, `vim`).
-  - **`jenkins.nix`**: Configures Jenkins SSH build agent (JDK 21, Docker daemon to build images, `jenkins` user in `docker` group, SSH setup).
+  - **`jenkins.nix`**: Configures Jenkins SSH build agent (JDK 25, Docker daemon to build images, `jenkins` user in `docker` group, SSH setup).
   - **`docker.nix`**: Enables standalone Docker daemon with weekly auto-pruning and installs `docker-compose`.
   - **`lxc.nix`**: LXC container optimizations (fast network boot, tty autologin, unprivileged ping support).
 - **`modules/home/`**: Home Manager user configuration modules:

@@ -1,6 +1,6 @@
 # Jenkins SSH Agent on NixOS LXC
 
-A complete guide for setting up and connecting a dedicated **NixOS LXC Jenkins Build Agent** (with **JDK 21** and **Docker**) to a **Jenkins Controller** (running in Docker or on a remote server).
+A complete guide for setting up and connecting a dedicated **NixOS LXC Jenkins Build Agent** (with **JDK 25** and **Docker**) to a **Jenkins Controller** (running in Docker or on a remote server).
 
 ---
 
@@ -28,7 +28,7 @@ A complete guide for setting up and connecting a dedicated **NixOS LXC Jenkins B
 │  ┌───────────────────────────┐  │   SSH Port 22   │  ┌───────────────────────────┐  │
 │  │    Jenkins Controller     │──┼─────────────────┼─>│     NixOS LXC Agent       │  │
 │  │ (jenkins/jenkins:lts-jdk21)│  │ (User: jenkins) │  │  - User: jenkins (wheel)  │  │
-│  └───────────────────────────┘  │                 │  │  - OpenJDK 21             │  │
+│  └───────────────────────────┘  │                 │  │  - OpenJDK 25             │  │
 │                                 │                 │  │  - Docker Engine 29+      │  │
 │                                 │                 │  │  - Docker Compose         │  │
 └─────────────────────────────────┘                 │  └───────────────────────────┘  │
@@ -38,7 +38,7 @@ A complete guide for setting up and connecting a dedicated **NixOS LXC Jenkins B
 - **Jenkins Controller**: Connects to the NixOS agent via SSH using the `jenkins` user.
 - **NixOS LXC Agent**:
   - Provisions a dedicated user `jenkins` with passwordless console access and `wheel` / `docker` group membership.
-  - Installs **OpenJDK 21** and automatically symlinks `/usr/bin/java`.
+  - Installs **OpenJDK 25** and automatically symlinks `/usr/bin/java`.
   - Enables the Docker daemon so pipelines can build and run Docker containers without `sudo`.
   - Configures OpenSSH with standard MACs and Key Exchange algorithms for Java SSH client compatibility.
 
@@ -176,7 +176,7 @@ pct start 100
 6. Verify the log displays:
    ```
    Checking Java version in PATH...
-   Specification-Version: 21
+   Specification-Version: 25
    ...
    Agent successfully connected and online
    ```
