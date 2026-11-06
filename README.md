@@ -76,7 +76,7 @@ Edit `variables.nix` in the repository root to select your target container conf
 ## Setting Up the Jenkins Agent
 
 > [!TIP]
-> For the complete comprehensive setup guide, pipeline test examples, and troubleshooting (MAC negotiation, known_hosts, and Docker nesting), see **[JENKINS.md](./JENKINS.md)**.
+> For the complete comprehensive setup guide, pipeline test examples, and troubleshooting (MAC negotiation, known_hosts, and Docker nesting), see **[docs/jenkins.md](./docs/jenkins.md)**.
 
 When `jenkins = true`:
 

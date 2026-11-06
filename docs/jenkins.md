@@ -252,3 +252,4 @@ Run the pipeline. Both stages should complete with a green checkmark without req
 ### 4. Console Login Without Password
 - Both `root` and `jenkins` have `initialHashedPassword = ""`.
 - You can log in directly via the Proxmox Web Console (noVNC / xterm.js) by typing `root` or `jenkins` and pressing **Enter** (blank password).
+
