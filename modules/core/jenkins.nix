@@ -38,6 +38,7 @@
     home = "/home/jenkins";
     createHome = true;
     description = "Jenkins CI Build Agent";
+    initialHashedPassword = ""; # Allows passwordless login on container console
     extraGroups = [
       "docker"
       "wheel"
