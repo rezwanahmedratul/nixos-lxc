@@ -6,6 +6,14 @@
   # System Hostname
   hostName = "nixos-jenkins-agent";
 
+  # Pangolin Site Client (Tunnels this LXC container to your Pangolin gateway)
+  pangolin = true;
+  pangolinSite = {
+    id = "your-site-id";
+    secret = "your-site-secret";
+    endpoint = "https://your-pangolin-endpoint";
+  };
+
   # Primary User Configuration (Active when jenkins = false)
   username = "ratul";
 

@@ -22,8 +22,16 @@ Edit `variables.nix` in the repository root to select your target container conf
   jenkins = true;
   docker = false;
 
-  # Container Hostname
+  # System Hostname
   hostName = "nixos-jenkins-agent";
+
+  # Pangolin Site Client (Tunnels this LXC container to your Pangolin gateway)
+  pangolin = true;
+  pangolinSite = {
+    id = "your-site-id";
+    secret = "your-site-secret";
+    endpoint = "https:/your-pangolin-endpoint";
+  };
 
   # Primary User (used when jenkins = false)
   username = "ratul";
@@ -64,6 +72,7 @@ Edit `variables.nix` in the repository root to select your target container conf
   - **`packages.nix`**: System-wide packages (`curl`, `git`, `vim`).
   - **`jenkins.nix`**: Configures Jenkins SSH build agent (JDK 25, Docker daemon to build images, `jenkins` user in `docker` group, SSH setup).
   - **`docker.nix`**: Enables standalone Docker daemon with weekly auto-pruning and installs `docker-compose`.
+  - **`pangolin.nix`**: Configures declarative background service for Pangolin Site tunnel (`pangolin up site`) and installs `pangolin-cli`.
   - **`lxc.nix`**: LXC container optimizations (fast network boot, tty autologin, unprivileged ping support).
 - **`modules/home/`**: Home Manager user configuration modules:
   - **`default.nix`**: User home profile entrypoint, importing `git.nix` and `shell.nix`.

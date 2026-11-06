@@ -13,6 +13,13 @@
       assertion = !(vars.jenkins && vars.docker);
       message = "Conflict in variables.nix: 'jenkins' and 'docker' cannot both be true! Select 'jenkins = true' (Jenkins Agent with Docker & user jenkins), 'docker = true' (Docker with user ratul), or leave both false (Bare Metal with user ratul).";
     }
+    {
+      assertion = !(vars.pangolin or false) || (
+        (vars.pangolinId or (vars.pangolinSite.id or "")) != "" &&
+        (vars.pangolinSecret or (vars.pangolinSite.secret or "")) != ""
+      );
+      message = "When 'pangolin = true' in variables.nix, you must provide 'id' and 'secret' under 'pangolinSite' (or 'pangolinId' and 'pangolinSecret').";
+    }
   ];
 
   imports = [
@@ -22,5 +29,6 @@
     ./lxc.nix
   ]
   ++ lib.optional vars.jenkins ./jenkins.nix
-  ++ lib.optional vars.docker ./docker.nix;
+  ++ lib.optional vars.docker ./docker.nix
+  ++ lib.optional (vars.pangolin or false) ./pangolin.nix;
 }
