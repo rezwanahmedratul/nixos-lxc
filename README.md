@@ -157,3 +157,28 @@ The output tarball will be located in:
    incus launch nixos-base my-nixos-container -c security.nesting=true
    incus exec my-nixos-container -- bash
    ```
+
+---
+
+## Managing & Rebuilding Inside the Container
+
+Once inside the running container, you can clone your configuration into `/etc/nixos` to make changes and rebuild:
+
+```bash
+# 1. Navigate to /etc/nixos
+cd /etc/nixos
+
+# 2. Clone the configuration repository
+# Note: if /etc/nixos contains initial files, you can clone into a temp directory or directly:
+git clone https://github.com/rezwanahmedratul/nixos-lxc.git .
+
+# 3. (Optional) Adjust variables in variables.nix as needed
+vim variables.nix
+
+# 4. Rebuild and activate the system
+# For Proxmox VE containers:
+sudo nixos-rebuild switch --flake .#proxmox-lxc
+
+# Or for standard LXC / Incus containers:
+sudo nixos-rebuild switch --flake .#nixos-lxc
+```
