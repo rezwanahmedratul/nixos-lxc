@@ -15,10 +15,10 @@
 
   # Unprivileged ping support (enables ICMP for non-root users in unprivileged LXC)
   security.wrappers.ping = {
-    owner = "root";
-    group = "root";
-    capabilities = "cap_net_raw+p";
-    source = "${pkgs.iputils.out}/bin/ping";
+    owner = lib.mkDefault "root";
+    group = lib.mkDefault "root";
+    capabilities = lib.mkDefault "cap_net_raw+p";
+    source = lib.mkDefault "${pkgs.iputils.out}/bin/ping";
   };
 
   # Network configuration: modern systemd-networkd with DHCP on veth/eth interfaces
