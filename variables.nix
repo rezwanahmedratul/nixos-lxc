@@ -20,6 +20,7 @@
   # SSH Authorized Keys for user 'ratul' and root
   authorizedKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE2kXjQ5NmBPJUxeLwJkex8Za6L+yLtQy021v4nrg0TV rezwanahmedratul007@gmail.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEqE6+H7/m6tsCtT9YGWr1S7BY5ztS82YcubMMNXLy3P docker-server"  
   ];
 
   # SSH Authorized Keys for user 'jenkins'
