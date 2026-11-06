@@ -62,6 +62,16 @@
     openFirewall = true;
   };
 
+  # System-wide Git configuration
+  programs.git = {
+    enable = true;
+    config = {
+      safe.directory = [
+        "/etc/nixos"
+      ];
+    };
+  };
+
   # Nix Package Manager & Flakes configuration
   nix.settings = {
     experimental-features = [

@@ -11,6 +11,9 @@
       init.defaultBranch = "main";
       pull.rebase = false;
       color.ui = "auto";
+      safe.directory = [
+        "/etc/nixos"
+      ];
     };
   };
 }
