@@ -75,6 +75,9 @@ Edit `variables.nix` in the repository root to select your target container conf
 
 ## Setting Up the Jenkins Agent
 
+> [!TIP]
+> For the complete comprehensive setup guide, pipeline test examples, and troubleshooting (MAC negotiation, known_hosts, and Docker nesting), see **[JENKINS.md](./JENKINS.md)**.
+
 When `jenkins = true`:
 
 1. **Add your Jenkins Controller's Public Key**:
